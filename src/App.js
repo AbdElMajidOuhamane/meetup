@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import AuthPage from "./pages/AuthPage";
 import AddPost from "./pages/AddPost";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />}/> 
         <Route path="/signin" element={<AuthPage />}/> 
         <Route path="/addpost" element={<AddPost />}/> 
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
       <Footer />
     </BrowserRouter>

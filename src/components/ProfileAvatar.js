@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProfileAvatar = () => { 
     const { user } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
+    const navigate=useNavigate()
    
   
     useEffect(() => {
@@ -33,7 +35,7 @@ const ProfileAvatar = () => {
     console.log("The Data is", userData);
   
     return (
-      <div>
+      <div style={{cursor:"pointer"}} onClick={()=>navigate("/profile")}>
      {userData.avatar?
      
      <img class="w-10 h-10 rounded-full" src={userData.avatar.url}   alt="Rounded avatar"></img>
