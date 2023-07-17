@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import {  NavLink, useNavigate } from 'react-router-dom'
 import { GrAddCircle } from 'react-icons/gr';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
+import ProfileAvatar from './ProfileAvatar';
 
 
 const Navbar = () => {
   const [search, setSearch] = useState(false)
   const navigate =useNavigate()
+  const {logout}=useLogout()
+  const {user}=useAuthContext();
+  const handleClick=()=>{
+    logout()
+  }
   return (
     
 <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -14,9 +22,17 @@ const Navbar = () => {
       <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">MeetUp</span>
   </NavLink>
   <div className="flex md:order-2 gap-2">
-      <button onClick={()=>navigate("/signin")} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        LogIn / SignIn
+  {user &&(
+    <div className='flex md:order-2 gap-2'>
+    <ProfileAvatar />
+  <button onClick={handleClick} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">
+        Log out
         </button>
+        </div>
+        )}
+      {!user &&(<button onClick={()=>navigate("/signin")} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        LogIn / SignIn
+        </button>)}
         <button onClick={()=>navigate("/addpost")} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 ">
         <GrAddCircle />
         </button>
