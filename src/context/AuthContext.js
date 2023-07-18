@@ -12,7 +12,8 @@ export const authReducer=(state,action)=>{
                 return {user:null}
                 
             
-
+        case "PICPROFILE":
+            return {user:action.payload}
         default:
             return state
     }

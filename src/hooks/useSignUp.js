@@ -9,14 +9,14 @@ export const useSignUp=()=>{
 
     const {dispatch}=useAuthContext()
 
-    const signup=async(email,password,username)=>{
+    const signup=async(email,password,username,avatar)=>{
         setIsLoading(true);
         setError(null);
 
         const res = await fetch("/api/users/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password,username })
+            body: JSON.stringify({ email, password,username,avatar })
           });
           
           if (!res.ok) {

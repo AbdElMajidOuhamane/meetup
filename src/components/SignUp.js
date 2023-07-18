@@ -10,7 +10,8 @@ const SignUp = () => {
     const {signup,isLoading,error}=useSignUp()
     const handleSubmit=async(e)=>{
       e.preventDefault()
-      console.log(signup(email,password,username))
+      const avatar={};
+      console.log(signup(email,password,username,avatar))
       await signup(email,password,username)
       navigate('/')
     }
