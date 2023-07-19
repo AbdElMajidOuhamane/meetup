@@ -5,8 +5,17 @@ const AddFrom = () => {
     <div  className='md:container md:mx-auto'>
     <form>
     <div className="relative z-0 w-full mb-6 group">
+      <div className='grid md:grid-cols-2 md:gap-6'>
+        <div>
     <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
         <input type="text" id="large-input" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"required/>
+        </div>
+
+        <div>
+        <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Categry</label>
+        <input type="text" id="large-input" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"required/>
+        </div>
+      </div>
     </div>
     <div className="grid md:grid-cols-2 md:gap-6">
         <div className="relative z-0 w-full mb-6 group">
