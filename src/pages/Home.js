@@ -10,7 +10,7 @@ const Home = () => {
 
   // Get the location object using the useLocation hook
   const location = useLocation();
-
+  console.log(location);
   // Extract the 'keyword' query parameter from the location object
   const keyword = new URLSearchParams(location.search).get('keyword');
 
@@ -18,6 +18,7 @@ const Home = () => {
     const fetchPostData = async () => {
       if (user && user.accessToken) {
         try {
+         
           const response = await fetch(`/api/posts/all?keyword=${encodeURIComponent(keyword)}`, {
             headers: {
               Authorization: `Bearer ${user.accessToken}`,
@@ -38,7 +39,9 @@ const Home = () => {
 
   return (
     <>
+     
    {user? <div className="grid w-full gap-6 md:grid-cols-4 p-40 bg-slate-300">
+  
       {data && data.map((card)=>(
         <Card key={card._id} card={card} />
         )
