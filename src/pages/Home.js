@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Card from '../components/Card'
 import { AuthContext } from '../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Pagination from '../components/Pagination';
 
 const Home = () => {
   const navigate=useNavigate()
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
-
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
   // Get the location object using the useLocation hook
   const location = useLocation();
   console.log(location);
@@ -35,17 +37,30 @@ const Home = () => {
     fetchPostData();
   }, [user, keyword]);
 
+  const sortedData = useMemo(() => {
+    if (!data) return [];
+    return data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }, [data]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+
 
 
   return (
     <>
      
-   {user? <div className="grid w-full gap-6 md:grid-cols-4 p-40 bg-slate-300">
+   {user? <div className="grid w-full gap-6 md:grid-rows-4 p-40 bg-slate-300">
   
-      {data && data.map((card)=>(
-        <Card key={card._id} card={card} />
-        )
-      )}
+      {data && currentItems.map((card) => (
+            <Card key={card._id} card={card} />
+          ))}
 
 </div>:
 <div className="container mx-auto bg-slate-300">
@@ -62,6 +77,11 @@ const Home = () => {
 </button></div>
 </div>
 }
+<Pagination
+ currentPage={currentPage}
+ data={sortedData}
+ itemsPerPage={itemsPerPage}
+ onPageChange={handlePageChange} />
 </>
    
   )
