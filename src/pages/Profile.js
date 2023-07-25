@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import moment from 'moment';
 import { useChangePic } from '../hooks/useChangePic'
+import ProfilePosts from '../components/ProfilePosts';
+
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
@@ -36,7 +38,8 @@ const Profile = () => {
   
       fetchUserData();
     }, [user]);
-  
+
+ 
     if (!userData) {
       return <div>Loading...</div>;
     }
@@ -84,7 +87,9 @@ const Profile = () => {
 
           <p className="mt-8 text-gray-500">Joined on {moment(userData.createdAt).format("D MMMM, YYYY")}</p>
           <p className="mt-2 text-gray-500">im thinkin what may add as user informations</p>
+        
         </div>
+      <ProfilePosts />
       </div>
     </div>
   );
