@@ -41,7 +41,7 @@ const Profile = () => {
 
  
     if (!userData) {
-      return <div>Loading...</div>;
+      return <isLoading />
     }
   
   

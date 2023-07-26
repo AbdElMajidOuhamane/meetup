@@ -3,6 +3,7 @@ import Card from '../components/Card'
 import { AuthContext } from '../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Pagination from '../components/Pagination';
+import isLoading from '../components/isLoading';
 
 const Home = () => {
   const navigate=useNavigate()
@@ -49,14 +50,16 @@ const Home = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-
+  
+  if (!data) {
+    return <isLoading />
+  }
 
 
   return (
     <>
      
-   {user? <div className="grid w-full gap-6 md:grid-rows-4 p-40 bg-slate-300">
+   {user? <div className="grid w-full gap-6 md:grid-cols-4 p-40 bg-slate-300">
   
       {data && currentItems.map((card) => (
             <Card key={card._id} card={card} />

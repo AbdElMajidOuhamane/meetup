@@ -29,7 +29,7 @@ const ProfilePosts = () => {
       fetchPostData();
     }, [user]);
   return (
-    <div className="grid w-full gap-6 md:grid-rows-4 p-4">
+    <div className="grid w-full gap-6 md:grid-cols-4 p-4">
         {data && data.map((card)=>(
         <Card key={card._id} card={card} />
         )
